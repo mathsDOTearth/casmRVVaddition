@@ -1,8 +1,7 @@
 # My First C Assembly Hybrid Vector Program
+Here we are combining C and RISC-V assembly in your second RISC-V RVV 0.7.1 program.  It is assumed that you are familiar with the `vim` editor, the C programming language and some RISC-V assembly language.
 
-Following on from [part 1](https://riscv.epcc.ed.ac.uk/documentation/first_vector_prog/), next up we look at combining C and RISC-V assembly in your second RISC-V RVV 0.7.1 program and running it on the EPCC RISC-V testbed.  It is assumed that you are familiar with the `vim` editor, the C programming language and some RISC-V assembly language.
-
-As with part one, you will need [access](https://riscv.epcc.ed.ac.uk/documentation/access/) to the EPCC RISC-V testbed to be able to compile and run programs on several available systems.  You will need to be logged in to the EPCC RISC-V testbed login node before proceeding with this guide.  I have included code for RISC-V RVV version 1.0 and the SPIKE command line to run it, but no support will be given in this document in setting up SPIKE.
+I have included code for RISC-V RVV version 1.0 and the SPIKE command line to run it, but no support will be given in this document in setting up SPIKE.
 
 # Setting Up the Compiler
 
@@ -21,7 +20,7 @@ mkdir rvv-casm-test
 cd rvv-casm-test
 ```
 
-The `Makefile` needs to give the correct GCC command to compile and assemble our code so that it can be run on the RISC-V Testbed:
+The `Makefile` needs to give the correct GCC command to compile and assemble our code:
 
 ```
 vim Makefile
@@ -157,40 +156,15 @@ vec_add:
 
 We compile the code by typing `make`
 
-Once we have our executable we can create a Slurm batch file to run the program on one of the EPCC Testbed Milk-V Pioneer computers:
-
-```
-vim rvvaddition.srun
-```
+Once we have our executable we can run it.
 
 ```bash
-#!/bin/bash
-#SBATCH -A <Your Username>
-#SBATCH -n 1
-#SBATCH --nodelist=rvc25
-#SBATCH --time=00:01:00
-
 ./RVVaddition
 ```
-
-Remember to replace \<Your Username\> with your EPCC RISC-V testbed username.   
-
-We set the nodelist to `rvc25` so that we target a Milk-V Pioneer computer which we know supports RVV version 0.7.1
-
-Finally we can run our program:
-
-```
-sbatch rvvaddition.srun
-```
-
-After entering the command above you will get a message like `Submitted batch job 9984` where the number will be unique to your run.
-
-An output file will be created called `slurm-9984.out` (change the number to the one given by the submission output above).  This file will hopefully contain the output from your program.  If the run failed, this file will contain the error messages related to the failed run.
 
 Here is the expected output from our vector addition program:
 
 ```
-<My Username>@riscv-login:~/rvv-test$ more slurm-9984.out
 Vector A:  1  2  3  4
 Vector B:  5  6  7  8
 Vector C:  6  8 10 12
