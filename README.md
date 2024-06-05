@@ -3,14 +3,6 @@ Here we are combining C and RISC-V assembly in your second RISC-V RVV 0.7.1 prog
 
 I have included code for RISC-V RVV version 1.0 and the SPIKE command line to run it, but no support will be given in this document in setting up SPIKE.
 
-# Setting Up the Compiler
-
-For this example we will use the GNU GCC compiler version 10.2 with support for RVV.  This version of the GCC compiler will also be used to assemble the assembly language portion of the program. To enable this on the RISC-V Testbed login node we need to load the correct module:
-
-```
-module load riscv64-linux/gnu-10.2-rvv
-```
-
 # Creating a Makefile
 
 We need to create an area to write our code in and provide a Makefile to enable us to easily build our program:
